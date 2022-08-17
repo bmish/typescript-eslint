@@ -60,6 +60,7 @@
     "@types/marked": "*",
     "@types/prettier": "*",
     "chalk": "^5.0.1",
+    "eslint-plugin-eslint-plugin": "^5.0.1",
     "json-schema": "*",
     "marked": "^4.0.15",
     "prettier": "*",
