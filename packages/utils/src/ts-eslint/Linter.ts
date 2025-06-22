@@ -242,7 +242,7 @@ namespace Linter {
     /**
      * Information for suggestions
      */
-    suggestions?: LintSuggestion[];
+    suggestions?: readonly LintSuggestion[];
   }
 
   export interface FixReport {
@@ -253,7 +253,7 @@ namespace Linter {
     /**
      * Collection of all messages for the given code
      */
-    messages: LintMessage[];
+    messages: readonly LintMessage[];
     /**
      * Fixed code text (might be the same as input if no fixes were applied).
      */

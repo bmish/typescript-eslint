@@ -26,7 +26,7 @@ export declare class ESLintBase<
   calculateConfigForFile(filePath: string): Promise<Config>;
 
   getRulesMetaForResults(
-    results: LintResult[],
+    results: readonly LintResult[],
   ): Record<string, RuleMetaData<string, Record<string, unknown>>>;
 
   /**
@@ -42,7 +42,9 @@ export declare class ESLintBase<
    * @param patterns The lint target files. This can contain any of file paths, directory paths, and glob patterns.
    * @returns The promise that will be fulfilled with an array of LintResult objects.
    */
-  lintFiles(patterns: string | string[]): Promise<LintResult[]>;
+  lintFiles(
+    patterns: string | readonly string[],
+  ): Promise<readonly LintResult[]>;
 
   /**
    * This method lints the given source code text and then returns the results.
@@ -59,7 +61,10 @@ export declare class ESLintBase<
    *          being only one lint result) in order to keep the interfaces between this and the eslint.lintFiles()
    *          method similar.
    */
-  lintText(code: string, options?: LintTextOptions): Promise<LintResult[]>;
+  lintText(
+    code: string,
+    options?: LintTextOptions,
+  ): Promise<readonly LintResult[]>;
 
   /**
    * This method loads a formatter. Formatters convert lint results to a human- or machine-readable string.
@@ -92,7 +97,7 @@ export declare class ESLintBase<
    * @param results The LintResult objects to write.
    * @returns The promise that will be fulfilled after all files are written.
    */
-  static outputFixes(results: LintResult[]): Promise<void>;
+  static outputFixes(results: readonly LintResult[]): Promise<void>;
   /**
    * The version text.
    */
@@ -155,7 +160,7 @@ export interface ESLintOptions<Config extends Linter.ConfigType> {
    * The types of the rules that the `eslint.lintFiles()` and `eslint.lintText()` methods use for autofix.
    * @default null
    */
-  fixTypes?: ('directive' | 'problem' | 'suggestion')[] | null;
+  fixTypes?: readonly ('directive' | 'problem' | 'suggestion')[] | null;
   /**
    * If false is present, the `eslint.lintFiles()` method doesn't interpret glob patterns.
    * @default true
@@ -184,7 +189,7 @@ export interface DeprecatedRuleInfo {
   /**
    *  The rule IDs that replace this deprecated rule.
    */
-  replacedBy: string[];
+  replacedBy: readonly string[];
   /**
    *  The rule ID.
    */
@@ -219,7 +224,7 @@ export interface LintResult {
   /**
    * The array of LintMessage objects.
    */
-  messages: LintMessage[];
+  messages: readonly LintMessage[];
   /**
    * The source code of the file that was linted, with as many fixes applied as possible.
    */
@@ -239,7 +244,7 @@ export interface LintResult {
   /**
    * The array of SuppressedLintMessage objects.
    */
-  suppressedMessages: SuppressedLintMessage[];
+  suppressedMessages: readonly SuppressedLintMessage[];
   /**
    * The information about the deprecated rules that were used to check this file.
    */
@@ -351,7 +356,7 @@ export interface LintMessage {
    * undefined if this message doesn't have any suggestions.
    */
   suggestions:
-    | {
+    | readonly {
         desc: string;
         fix: EditInfo;
       }[]
@@ -365,7 +370,7 @@ export interface SuppressedLintMessage extends LintMessage {
   /**
    * The list of suppressions.
    */
-  suppressions?: {
+  suppressions?: readonly {
     /**
      * The free text description added after the `--` in the comment
      */
@@ -404,5 +409,5 @@ export interface Formatter {
    * The method to convert the LintResult objects to text.
    * Promise return supported since 8.4.0
    */
-  format(results: LintResult[]): string | Promise<string>;
+  format(results: readonly LintResult[]): string | Promise<string>;
 }

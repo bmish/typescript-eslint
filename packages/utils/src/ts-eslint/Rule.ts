@@ -71,7 +71,7 @@ export interface DeprecatedInfo {
   /**
    * An empty array explicitly states that there is no replacement.
    */
-  replacedBy?: ReplacedByInfo[];
+  replacedBy?: readonly ReplacedByInfo[];
   /**
    * The package version since when the rule is deprecated (should use full
    * semver without a leading "v").
@@ -302,7 +302,7 @@ export interface RuleContext<
    *
    * @deprecated in favor of `SourceCode#getAncestors`
    */
-  getAncestors(): TSESTree.Node[];
+  getAncestors(): readonly TSESTree.Node[];
 
   /**
    * Returns a list of variables declared by the given node.
@@ -395,17 +395,17 @@ export interface RuleContext<
  */
 export interface CodePath {
   /** Code paths of functions this code path contains. */
-  childCodePaths: CodePath[];
+  childCodePaths: readonly CodePath[];
 
   /**
    * Segments of the current traversal position.
    *
    * @deprecated
    */
-  currentSegments: CodePathSegment[];
+  currentSegments: readonly CodePathSegment[];
 
   /** The final segments which includes both returned and thrown. */
-  finalSegments: CodePathSegment[];
+  finalSegments: readonly CodePathSegment[];
 
   /**
    * A unique string. Respective rules can use `id` to save additional
@@ -416,10 +416,10 @@ export interface CodePath {
   initialSegment: CodePathSegment;
 
   /** The final segments which includes only returned. */
-  returnedSegments: CodePathSegment[];
+  returnedSegments: readonly CodePathSegment[];
 
   /** The final segments which includes only thrown. */
-  thrownSegments: CodePathSegment[];
+  thrownSegments: readonly CodePathSegment[];
 
   /** The code path of the upper function/global scope. */
   upper: CodePath | null;
@@ -445,13 +445,13 @@ export interface CodePathSegment {
    * The next segments. If forking, there are two or more. If final, there is
    * nothing.
    */
-  nextSegments: CodePathSegment[];
+  nextSegments: readonly CodePathSegment[];
 
   /**
    * The previous segments. If merging, there are two or more. If initial, there
    * is nothing.
    */
-  prevSegments: CodePathSegment[];
+  prevSegments: readonly CodePathSegment[];
 
   /**
    * A flag which shows whether it is reachable. This becomes `false` when
@@ -749,7 +749,7 @@ export interface RuleModuleWithMetaDocs<
 
 export type AnyRuleModuleWithMetaDocs = RuleModuleWithMetaDocs<
   string,
-  unknown[]
+  readonly unknown[]
 >;
 
 /**
@@ -789,7 +789,7 @@ export type LooseRuleCreateFunction = (context: any) => Record<
 
 export type RuleCreateFunction<
   MessageIds extends string = never,
-  Options extends readonly unknown[] = unknown[],
+  Options extends readonly unknown[] = readonly unknown[],
 > = (context: Readonly<RuleContext<MessageIds, Options>>) => RuleListener;
 export type AnyRuleCreateFunction = RuleCreateFunction<
   string,

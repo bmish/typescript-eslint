@@ -73,7 +73,7 @@ export namespace ClassicConfig {
     /**
      * The path to other config files or the package name of shareable configs.
      */
-    extends?: string | string[];
+    extends?: string | readonly string[];
     /**
      * The global variable settings.
      */
@@ -85,7 +85,7 @@ export namespace ClassicConfig {
     /**
      * The override settings per kind of files.
      */
-    overrides?: ConfigOverride[];
+    overrides?: readonly ConfigOverride[];
     /**
      * The path to a parser or the package name of a parser.
      */
@@ -97,7 +97,7 @@ export namespace ClassicConfig {
     /**
      * The plugin specifiers.
      */
-    plugins?: string[];
+    plugins?: readonly string[];
     /**
      * The processor specifier.
      */
@@ -117,15 +117,15 @@ export namespace ClassicConfig {
   }
 
   export interface ConfigOverride extends BaseConfig {
-    excludedFiles?: string | string[];
-    files: string | string[];
+    excludedFiles?: string | readonly string[];
+    files: string | readonly string[];
   }
 
   export interface Config extends BaseConfig {
     /**
      * The glob patterns that ignore to lint.
      */
-    ignorePatterns?: string | string[];
+    ignorePatterns?: string | readonly string[];
     /**
      * The root flag.
      */
@@ -261,13 +261,13 @@ export namespace FlatConfig {
      */
     files?: (
       | string
-      | string[] // yes, a single layer of array nesting is supported
+      | readonly string[] // yes, a single layer of array nesting is supported
     )[];
     /**
      * An array of glob patterns indicating the files that the configuration object should not apply to.
      * If not specified, the configuration object applies to all files matched by files.
      */
-    ignores?: string[];
+    ignores?: readonly string[];
     /**
      * Language specifier in the form `namespace/language-name` where `namespace` is a plugin name set in the `plugins` field.
      */

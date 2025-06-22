@@ -32,7 +32,7 @@ export namespace LegacyESLint {
      * Note: This option only applies when you pass directory paths to the eslint.lintFiles() method.
      * If you pass glob patterns, ESLint will lint all files matching the glob pattern regardless of extension.
      */
-    extensions?: string[] | null;
+    extensions?: readonly string[] | null;
     /**
      * If false is present, the eslint.lintFiles() method doesn't respect `.eslintignore` files in your configuration.
      * @default true
@@ -63,7 +63,7 @@ export namespace LegacyESLint {
     /**
      * An array of paths to directories to load custom rules from.
      */
-    rulePaths?: string[];
+    rulePaths?: readonly string[];
     /**
      * If false is present, ESLint doesn't load configuration files (.eslintrc.* files).
      * Only the configuration of the constructor options is valid.
